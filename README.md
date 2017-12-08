@@ -1,0 +1,1 @@
+# ReactOS Application Compatibility Database

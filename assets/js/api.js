@@ -31,11 +31,12 @@ function getRecordByID(id)
 
 /**
  * @function fetchQuery
- * @author Mcpg
- * @param query Query to search. If null, method will return 10 newest records
+ * @author Mcpg & Cernodile
+ * @param query string Query to search. If null, method will return 10 newest records
+ * @param showcase boolean Whether to showcase the results
  * @example fetchQuery("Need for Speed");
  */
-function fetchQuery(query)
+function fetchQuery(query, showcase)
 {
     if (query == null) query = "";
     
@@ -51,7 +52,9 @@ function fetchQuery(query)
         {
             elementCache[Number(parsed[i].ID)] = parsed[i]; 
         }
-        return parsed;
+        if (showcase) {
+            infoFromRawData(parsed);
+        }
     }
     
     xhr.open("POST", "https://cernodile.com/api/ext/rosdb/fetch.php", true);

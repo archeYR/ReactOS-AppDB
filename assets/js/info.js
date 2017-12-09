@@ -26,7 +26,7 @@ function infoFromRawData (json) {
     const div = document.getElementById("search-results");
     div.innerHTML = "";
     div.appendChild(results);
-    results.appendChild(createInfoElement("li", json[key]["APP_NAME"], json[key]["ID"]);
+    results.appendChild(createInfoElement("li", json[key]["APP_NAME"], json[key]["ID"]));
   }
 }
 

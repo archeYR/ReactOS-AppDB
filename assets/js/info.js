@@ -99,6 +99,7 @@ function infoFromRawData (json) {
  */
 function putIntoAppDetails(raw)
 {
+    // TODO: putting text-areas (what works, what doesn't, what wasn't tested and additional comments)
     document.getElementById("application-info-header").innerHTML = "Info for " + raw.APP_NAME;    
     
     const div = document.getElementById("application-info");

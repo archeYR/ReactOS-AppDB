@@ -1,4 +1,4 @@
-// API for using the database
+2// API for using the database
 
 // Used to cache sent elements
 var elementCache = [];
@@ -6,7 +6,10 @@ var elementCache = [];
 // TODO: implementation and adding more functions
 
 /**
- * Returns all of the records from the database
+ * @function getRecordAmount
+ * @author Mcpg
+ * @example getRecordAmount();
+ * @returns amount of the records *in the database*
  */
 function getRecordAmount()
 {
@@ -14,24 +17,23 @@ function getRecordAmount()
 }
 
 /**
- * Returns array containing record info *from*
- * elementCache.
- *
- * Arguments:
- *   - id: id of the record
+ * @function getRecordByID
+ * @author Mcpg
+ * @param id ID of the cached record
+ * @example getRecordById(1);
+ * @returns record with ID 1
  */
 function getRecordByID(id)
 {
+    if (id == null) return undefined;
     return elementCache[Number(id)];
 }
 
 /**
- * Sends a request to the database and saves
- * the results in the `elementCache` array.
- *
- * Arguments:
- *   - query: query to search. If null, then
- *            10 newest records will be given.
+ * @function fetchQuery
+ * @author Mcpg
+ * @param query Query to search. If null, method will return 10 newest records
+ * @example fetchQuery("Need for Speed");
  */
 function fetchQuery(query)
 {

@@ -21,11 +21,11 @@ function createInfoElement (tag, content, id) {
  **/
 function infoFromRawData (json) {
   // Assuming this is normal data with 2 results
+  const div = document.getElementById("search-results");
+  const results = document.createElement("ul");
+  div.innerHTML = "";
+  div.appendChild(results);
   for (var key in json) {
-    const results = document.createElement("ul");
-    const div = document.getElementById("search-results");
-    div.innerHTML = "";
-    div.appendChild(results);
     results.appendChild(createInfoElement("li", json[key]["APP_NAME"], json[key]["ID"]));
   }
 }

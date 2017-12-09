@@ -45,12 +45,11 @@ function fetchQuery(query)
         var data = xhr.responseText;
         var parsed = JSON.parse(data);
         
-        console.log(parsed);
-        
         for (let i = 0; i < parsed.length; i++)
         {
             elementCache[Number(parsed[i].ID)] = parsed[i]; 
         }
+        return parsed;
     }
     
     xhr.open("POST", "https://cernodile.com/api/ext/rosdb/fetch.php", true);

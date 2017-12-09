@@ -9,7 +9,7 @@
 **/
 function createInfoElement (tag, content, id) {
   var element = document.createElement(tag);
-  element.innerHTML = element.innerHTMl + content;
+  element.innerHTML = content;
   element.id = "infoElement";
   if (id) element.id = element.id + "-" + id;
   return element;

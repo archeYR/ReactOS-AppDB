@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function()
         }
         console.log("Searching for `" + searchedText + "`");
         fetchQuery(searchedText, true);
+        
+        document.getElementById("search-results-header").style.display = "inline-block";
     }, false);
 });
 

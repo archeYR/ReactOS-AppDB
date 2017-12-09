@@ -14,6 +14,57 @@ function createInfoElement (tag, content, id) {
   if (id) element.id = element.id + "-" + id;
   return element;
 }
+
+/**
+ * @function numberToRating
+ * @author Mcpg
+ * @param number to convert
+ * @example numberToRating(3);
+ * @returns Garbage, Bronze, Silver, Gold, or Platinum.
+ **/
+function numberToRating(number)
+{
+    // if the number is for whatever reason a string or something, convert it.
+    number = Number(number);
+    
+    switch(number)
+    {
+        case 1:
+            return "Garbage";
+        case 2:
+            return "Bronze";
+        case 3:
+            return "Silver";
+        case 4:
+            return "Gold";
+        case 5:
+            return "Platinum";
+        default:
+            return "Unknown rating";    
+    }
+}
+
+/**
+ * @function createBasicInfoElement
+ * @author Mcpg
+ * @param tag string Type of the element, e.g. li, span, etc.
+ * @param name string Name of the application's property (will be bolded and suffixed with `: `). May contain HTML.
+ * @param content string Content of the parameter. If null, then the returned element will be null.
+ * @example createBasicInfoElement("li", "My name", "Mcpg");
+ * @returns <li><strong>My name: </strong> Mcpg</li>
+ */
+function createBasicInfoElement(tag, name, content)
+{
+    if (content == null) return document.createTextNode("");    
+    
+    var element = document.createElement(tag);
+    var bolded = document.createElement("strong");
+    bolded.innerHTML = name + ": ";
+    element.appendChild(bolded);
+    element.innerHTML += content;
+    return element;
+}
+
 /**
  * @function infoFromRawData
  * @author cernodile
@@ -28,6 +79,31 @@ function infoFromRawData (json) {
   for (var key in json) {
     results.appendChild(createInfoElement("li", json[key]["APP_NAME"], json[key]["ID"]));
   }
+}
+
+/**
+ * @function putIntoAppDetails
+ * @author Mcpg
+ * @param raw raw JSON array containing application info
+ * @example putIntoAppDetails(getRecordByID(1));
+ */
+function putIntoAppDetails(raw)
+{
+    const div = document.getElementById("application-info");
+    const basicInfo = document.createElement("ul");
+    
+    div.style.display = "block";
+    div.innerHTML = "";
+    div.appendChild(basicInfo);
+    
+    basicInfo.appendChild(createBasicInfoElement("li", "Program name", raw.APP_NAME));
+    basicInfo.appendChild(createBasicInfoElement("li", "Program version", raw.APP_VERSION));
+    basicInfo.appendChild(createBasicInfoElement("li", "Program author", raw.APP_AUTHOR));
+    basicInfo.appendChild(createBasicInfoElement("li", "Tester", "<a href=\"https://github.com/" + raw.APP_TESTER + "\" title=\"" + raw.APP_TESTER + "\">" + raw.APP_TESTER + "</a>"));
+    basicInfo.appendChild(createBasicInfoElement("li", "Program URL", raw.APP_URL));
+    basicInfo.appendChild(createBasicInfoElement("li", "Test publishing time", raw.DATE));
+    basicInfo.appendChild(createBasicInfoElement("li", "Rating", numberToRating(raw.EDITOR_RATING)));
+    basicInfo.appendChild(createBasicInfoElement("li", "ReactOS version", raw.ROS_VERSION));
 }
 
 console.log("info.js initialized");

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function()
             return;
         }
         console.log("Searching for `" + searchedText + "`");
-        fetchQuery(searchedText);
+        fetchQuery(searchedText, true);
     }, false);
 });
 

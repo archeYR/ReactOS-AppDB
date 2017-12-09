@@ -6,6 +6,9 @@
         
         <link rel="stylesheet" href="./assets/css/style.css" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="./assets/js/api.js"></script>
+        <script src="./assets/js/search.js"></script>
     </head>
     <body>
         <div id="container">
@@ -14,10 +17,21 @@
                     <img src="./assets/img/logo.png" alt="ReactOS Application Compatibility Database" />
                 </div>
             </header>
+            
             <main>
                 <div id="form">
                     <input type="search" placeholder="Search..." id="search-box" />
                     <input type="submit" value="Search" id="search-button" />
+                </div>
+                
+                <!-- Elements will be added by a JS script -->
+                <div id="search-results">
+                    
+                </div>
+                
+                <!-- Elements will be added by a JS script -->
+                <div id="application-info">
+                
                 </div>
             </main>
         </div>

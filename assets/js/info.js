@@ -67,7 +67,7 @@ function createBasicInfoElement(tag, name, content)
 
 /**
  * @function infoFromRawData
- * @author cernodile
+ * @author cernodile & Mcpg
  * @param json object The json or array
  **/
 function infoFromRawData (json) {
@@ -77,7 +77,17 @@ function infoFromRawData (json) {
   div.innerHTML = "";
   div.appendChild(results);
   for (var key in json) {
-    results.appendChild(createInfoElement("li", json[key]["APP_NAME"], json[key]["ID"]));
+    let element = createInfoElement("li", "<a href=\"#\">" + json[key]["APP_NAME"] + "</a>", json[key]["ID"]);
+    
+    element.setAttribute("db-id", json[key]["ID"]);
+    
+    element.addEventListener("click", function()
+    {
+        if (!element.hasAttribute("db-id")) return;
+        putIntoAppDetails(elementCache[Number(element.getAttribute("db-id"))]);
+    });
+    
+    results.appendChild(element);
   }
 }
 
@@ -89,6 +99,8 @@ function infoFromRawData (json) {
  */
 function putIntoAppDetails(raw)
 {
+    document.getElementById("application-info-header").innerHTML = "Info for " + raw.APP_NAME;    
+    
     const div = document.getElementById("application-info");
     const basicInfo = document.createElement("ul");
     

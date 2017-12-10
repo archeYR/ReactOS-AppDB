@@ -71,7 +71,7 @@ function createBasicInfoElement(tag, name, content)
  * @param name string Name of the text area. It will be display bolded above the <textarea>
  * @param content string Content of the textarea. If null, then the method will return empty text node.
  * @example createBasicInfoElement("What wasn't tested", "Printing image");
- * @returns <div><strong>What wasn't teted:</strong><br /><textarea readonly=\"readonly\">Printing image</textarea></div>
+ * @returns <div><strong>What wasn't teted:</strong><br /><pre>Printing image</pre></div>
  */
 function createTextAreaInfoElement(name, content)
 {
@@ -85,10 +85,7 @@ function createTextAreaInfoElement(name, content)
     root.appendChild(strong);
     root.appendChild(document.createElement("br"));
     
-    var textarea = document.createElement("textarea");
-    textarea.setAttribute("readonly", "readonly");
-    textarea.setAttribute("cols", "70");
-    textarea.setAttribute("rows", "4");
+    var textarea = document.createElement("pre");
     textarea.innerHTML = content;
     
     root.appendChild(textarea);

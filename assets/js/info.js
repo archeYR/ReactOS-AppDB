@@ -49,7 +49,7 @@ function numberToRating(number)
  * @author Mcpg
  * @param tag string Type of the element, e.g. li, span, etc.
  * @param name string Name of the application's property (will be bolded and suffixed with `: `). May contain HTML.
- * @param content string Content of the parameter. If null, then the returned element will be null.
+ * @param content string Content of the parameter. If null, then the returned element will be an empty text node.
  * @example createBasicInfoElement("li", "My name", "Mcpg");
  * @returns <li><strong>My name: </strong> Mcpg</li>
  */
@@ -63,6 +63,36 @@ function createBasicInfoElement(tag, name, content)
     element.appendChild(bolded);
     element.innerHTML += content;
     return element;
+}
+
+/**
+ * @function createTextAreaInfoElement
+ * @author Mcpg
+ * @param name string Name of the text area. It will be display bolded above the <textarea>
+ * @param content string Content of the textarea. If null, then the method will return empty text node.
+ * @example createBasicInfoElement("What wasn't tested", "Printing image");
+ * @returns <div><strong>What wasn't teted:</strong><br /><textarea readonly=\"readonly\">Printing image</textarea></div>
+ */
+function createTextAreaInfoElement(name, content)
+{
+    if (content == null) return document.createTextNode("");
+    
+    var root = document.createElement("div");
+    root.className = "application-comment";
+    
+    var strong = document.createElement("strong");
+    strong.innerHTML = name + ":";
+    root.appendChild(strong);
+    root.appendChild(document.createElement("br"));
+    
+    var textarea = document.createElement("textarea");
+    textarea.setAttribute("readonly", "readonly");
+    textarea.setAttribute("cols", "70");
+    textarea.setAttribute("rows", "4");
+    textarea.innerHTML = content;
+    
+    root.appendChild(textarea);
+    return root;
 }
 
 /**
@@ -107,6 +137,7 @@ function putIntoAppDetails(raw)
     
     div.style.display = "block";
     div.innerHTML = "";
+    
     div.appendChild(basicInfo);
     
     basicInfo.appendChild(createBasicInfoElement("li", "Program name", raw.APP_NAME));
@@ -117,6 +148,11 @@ function putIntoAppDetails(raw)
     basicInfo.appendChild(createBasicInfoElement("li", "Test publishing time", raw.DATE));
     basicInfo.appendChild(createBasicInfoElement("li", "Rating", numberToRating(raw.EDITOR_RATING)));
     basicInfo.appendChild(createBasicInfoElement("li", "ReactOS version", raw.ROS_VERSION));
+    
+    div.appendChild(createTextAreaInfoElement("What works", raw.COMMENT_WORK));
+    div.appendChild(createTextAreaInfoElement("What doesn't work", raw.COMMENT_NOT_WORK));
+    div.appendChild(createTextAreaInfoElement("What wasn't tested", raw.COMMENT_NOT_TESTED));
+    div.appendChild(createTextAreaInfoElement("Additional comments", raw.COMMENT_ADDITIONAL_INFO));
 }
 
 console.log("info.js initialized");

@@ -1,3 +1,4 @@
+/*global fetchQuery*/
 // Searching function
 
 document.addEventListener("DOMContentLoaded", function()

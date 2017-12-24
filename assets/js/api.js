@@ -1,4 +1,5 @@
-2// API for using the database
+/*global infoFromRawData*/
+// API for using the database
 
 // Used to cache sent elements
 var elementCache = [];

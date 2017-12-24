@@ -1,3 +1,6 @@
+/*global elementCache*/
+
+
 /**
  * @function createInfoElement
  * @author cernodile
@@ -128,6 +131,7 @@ function putIntoAppDetails(raw)
 {
     // TODO: putting text-areas (what works, what doesn't, what wasn't tested and additional comments)
     document.getElementById("application-info-header").innerHTML = "Info for " + raw.APP_NAME;    
+    document.getElementById("application-info-header").style.display = "block";
     
     const div = document.getElementById("application-info");
     const basicInfo = document.createElement("ul");

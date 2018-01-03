@@ -6,15 +6,16 @@ document.addEventListener("DOMContentLoaded", function()
     // Get the elements
     var searchButton = document.getElementById("search-button");
     var searchBox = document.getElementById("search-box");
+    var formContainer = document.getElementById("form");
     
-    if (searchButton == null || searchBox == null)
+    if (searchButton == null || searchBox == null || formContainer == null)
     {
         // Site is for whatever reason incomplete, so we're doing nothing.
         return;
     }
     
-    // Register click event for the Search button
-    searchButton.addEventListener("click", function()
+    // Inits the search after pressing Search or Enter.
+    function initSearch()
     {
         // Get the text from the search input
         let searchedText = searchBox.value;
@@ -27,7 +28,19 @@ document.addEventListener("DOMContentLoaded", function()
         fetchQuery(searchedText, true);
         
         document.getElementById("search-results-header").style.display = "inline-block";
-    }, false);
+    }
+    
+    // Register click event for the Search button
+    searchButton.addEventListener("click", initSearch, false);
+    
+    // Pressing enter submits the form
+    formContainer.addEventListener('keypress', (event) =>
+    {
+      if (event.key == "Enter")
+      {
+          initSearch();
+      }
+    });
 });
 
 console.log("search.js initialized");

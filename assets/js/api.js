@@ -39,10 +39,10 @@ function getRecordByID(id)
  */
 function fetchQuery(query, showcase)
 {
+    console.log("Sending query...");
     if (query == null) query = "";
     
     var xhr = new XMLHttpRequest();
-    
     
     xhr.onload = function(e)
     {

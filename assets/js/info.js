@@ -106,6 +106,13 @@ function infoFromRawData (json) {
   const results = document.createElement("ul");
   div.innerHTML = "";
   div.appendChild(results);
+  
+  if (json.length == 0)
+  {
+      div.innerHTML = "<p style='margin-left: 10px;'>No results were found :(</p>";
+      return;
+  }
+  
   for (var key in json) {
     let element = createInfoElement("li", "<a href=\"#\">" + json[key]["APP_NAME"] + "</a>", json[key]["ID"]);
     
